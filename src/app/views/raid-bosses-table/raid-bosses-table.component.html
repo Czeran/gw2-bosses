@@ -1,0 +1,55 @@
+<!--<table>-->
+<!--  <tr>-->
+<!--    <th>Wing</th>-->
+<!--    <th>Nazwa bossa</th>-->
+<!--    <th>Zrobiony?</th>-->
+<!--  </tr>-->
+<!--  <ng-container *ngFor="let wing of wings">-->
+<!--    <tr *ngFor="let boss of wing.bosses; let i = index">-->
+<!--      <td-->
+<!--          [rowSpan]="wing.bosses.length"-->
+<!--          *ngIf="i === 0">-->
+<!--        {{wing.name}}-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        {{boss.name}}-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        {{boss.done ? 'Skończone' : 'Do zrobienia'}}-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </ng-container>-->
+
+<!--</table>-->
+<!--<br><br><br>-->
+
+<div class="table">
+  <ng-container *ngFor="let wing of wings; let i = index">
+    <ng-container *ngFor="let boss of wing.bosses; let j = index">
+      <div class="table__wing"
+           [ngStyle]="borders[i]"
+           *ngIf="j === 0">
+        {{wing.name}}
+      </div>
+      <div class="table__cell table__cell--boss-name"
+           [ngClass]="{'table__cell--done': boss.done}">
+        {{boss.name}}
+      </div>
+      <div class="table__cell table__cell--actions"
+           [ngClass]="{'table__cell--done': boss.done}">
+        <span>
+          <button (click)="onStatusChange(i, j)">
+            <span class="material-icons">
+              {{!boss.done ? 'close' : 'done'}}
+            </span>
+          </button>
+        </span>
+        <span>
+          <button>
+            <span class="material-icons">cloud_upload</span>
+          </button>
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
